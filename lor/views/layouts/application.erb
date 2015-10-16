@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <title><%=@title%></title>
+    <script async="" src="/lor/javascripts/lor.js?20150917-0540"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Open+Sans:600&amp;subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/lor/stylesheets/tango/combined.css?20150917-0540">
+
+    <script async="" src="/lor/javascripts/plugins.js"></script>
+  </head>
+  <body>
+    <div style="margin-left: 20px;margin-top: 15px;">
+      updated: 
+      <a href="/stat/recent_posts">recent</a>
+      <a href="/lor/forum">all forums</a>
+      <a href="/forum">main</a>
+    </div>
+    <div style="margin-left: 20px;margin-top: 15px;">
+      <%= yield %>
+    </div>
+  </body>
+</html>

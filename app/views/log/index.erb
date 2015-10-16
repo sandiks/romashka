@@ -1,0 +1,4 @@
+<% @dates.each do |dd| %>
+	<%= link_to dd, url_for(:log, :show, :date=> dd) %>
+	<br />
+<% end %>

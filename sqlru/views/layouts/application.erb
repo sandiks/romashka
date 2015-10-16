@@ -1,0 +1,24 @@
+<html>
+   <head>
+      <title><%= @title %></title>
+      
+      <script type="text/javascript" src="/sqlru/javascripts/helper.js"></script>
+      <script type="text/javascript" src="/sqlru/javascripts/jquery.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="/sqlru/stylesheets/layout.css" media="screen" />
+      <link rel="stylesheet" type="text/css" href="/sqlru/stylesheets/actualforum2.css" media="screen" />
+   </head>
+   <body>
+      <div style="margin-left: 20px;margin-top: 15px;">
+         updated:
+         <a href="/sqlru/stat/recent_posts">recent</a>
+         <a href="/sqlru/forum">all forums</a>
+         <a href="/forum">main</a>
+      </div>
+      
+      <div id="page-container">
+         <div id="content-wrapper-forum">
+            <%= yield %>
+         </div>
+      </div>
+   </body>
+</html>

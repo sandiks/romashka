@@ -1,0 +1,23 @@
+<table style="width:90%;">
+	<tr>
+	<td valign="top">
+	<ul>
+
+		<% @forums.select{|f| f[:level]==0}.each do |f| %>
+		<li>
+		<b><%= f.name %> </b>:
+			
+				<% @forums.select{|subf| subf[:parent_fid]==f[:fid]}.each do |subf| %>
+					<% if subf.check==1 %>
+						,<a href="/gamedev/forum/<%= subf.fid %>"><%= subf.name %> 
+					<% else %>
+						,<a href="/gamedev/forum/<%= subf.fid %>" style="color:red"><%= subf.name %> </a>
+					<% end %>
+				<% end %>
+			
+		<% end %>
+		</li>
+	</ul>
+	</td>
+	</tr>
+</table>

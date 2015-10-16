@@ -1,0 +1,54 @@
+
+<script>
+$(function(){
+	$(".addedby").click(function (event) {
+		event.preventDefault();
+		//var filter = $( "input:text[name='name1']" ).val();
+		var filter = $(this).text();
+		$(".msgTable").each(function () {
+			var name = $(this).find("tr:eq(1) td:eq(0) a").text();
+			if (name.trim() !== filter.trim()) $(this).hide();
+		});
+	});
+	
+	$(".addedbyname").click(function () {
+		$(this).next().next().toggle();
+});
+});
+</script>
+
+<% for user in @thread_users %>
+|| <%= link_to "#{user[1]} (#{user[2]})"  , url_for(:thread, :by_user, :id => params[:id], :uid => user[0]) %>
+
+<% end %>
+
+<%= partial('shared/page_nav', :object => {:count=>@responses, :url=>@url, :page => @page})   %>
+
+<% for item in @posts %>
+
+<table class="msgTable" style="width:75%">
+	<tbody>
+		<tr>
+			<td id="id<%= item.mid %>" class="messageHeader" colspan="2"><img src="/images/message.gif" alt=""><%= @thread_title %>
+			</td>
+		</tr>
+		<tr style="vertical-align:top">
+			<td style="width:15%" class="msgBody">
+				<a href="http://www.sql.ru/forum/memberinfo.aspx?mid=<%= item.addeduid %>" class="addedby">
+				<%= item.addedby %> </a><br>
+				<font style="color:#888;">Member</font><br>
+				<br>
+				<span class="smallInfo">Откуда: <br>
+				Сообщений: <br></span>
+				
+			</td>
+			<td class="msgBody"><%= item.body.gsub('http://www.sql.ru/forum','').html_safe %></td>
+		</tr>
+		<tr>
+			<td colspan="2" class="msgFooter"><%= item.addeddate.strftime("%F %k:%M ") %> <a href="http://www.sql.ru/forum/actualutils.aspx?action=gotomsg&tid=<%= item.tid %>&msg=<%= item.mid %>">orig</a>
+		</td>
+	</tr>
+</tbody>
+</table>
+<% end %>
+<%= partial('shared/page_nav', :object => {:count=>@responses, :url=>@url, :page => @page}) if @show_pagination  %>

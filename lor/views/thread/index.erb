@@ -1,0 +1,56 @@
+<div id="bd">
+	<div class="messages" itemscope="" itemtype="http://schema.org/Article">
+		<!-- 11952494  -->
+		<% if not @first.nil? %>
+		<article class="msg" id="topic-">
+			<header>
+				
+				<h1 itemprop="headline">
+				<a href="/forum/general/4785800"><%= @title %></a>
+				</h1>
+			</header>
+			<div class="msg-container">
+				
+				<div class="msg_body">
+					<div itemprop="articleBody">
+						<%= @first.body.html_safe %>
+					</div>
+						<footer>
+							<div class="userpic"><img class="photo" src="" alt="" width="150" height="140"></div>
+							<div class="sign">
+								<a rel="author" itemprop="creator" href="/people/xxx/profile"><%= @first.addedby %></a> <span class="stars">★</span><br>
+								<time datetime="" itemprop="dateCreated"><%= @first.addeddate.strftime("%F %k:%M ") %></time>
+
+							</div>
+						</footer>
+					
+				</div>
+			</div>
+		</article>
+		<% end %>
+
+		<%= partial 'shared/page_nav', :object => {:count=>@responses, :url=>@url, :page => @page} %>
+
+		<div class="comment" id="comments" style="padding-top: 0.5em">
+			<div align="center" width="100%" style="margin-bottom: 1em">
+				
+				
+			</div>
+			<% @posts.each_with_index do |item, ind| %>
+			<article itemscope="itemscope" itemtype="http://schema.org/UserComments" itemprop="comment" id="comment-11952504" class="msg">
+				<div class="title"></div>
+				<div class="msg-container">
+					<div class="userpic"><img class="photo" src="" width="150" height="150"></div>
+					<div class="msg_body message-w-userpic">
+						<%= item.body.html_safe %>
+						<div class="sign"><a itemprop="creator" href="/people/xxx/profile"><%= item.addedby %></a> <span class="stars">★</span> (<time datetime="" itemprop="commentTime"><%= item.addeddate.strftime("%F %k:%M ") %></time>)
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<% end %>
+		
+	</div>
+</div>
+</div>

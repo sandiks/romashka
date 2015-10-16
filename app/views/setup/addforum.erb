@@ -1,0 +1,18 @@
+<% form_tag  url(:setup, :addforum)  do  %>
+<div class="row">
+	<div class="col-md-2">site id</div>
+	<div class="col-md-2">forum name</div>
+	<div class="col-md-2">forum id</div>
+	<div class="col-md-2">parent fid</div>
+</div>
+<div class="row">
+	<div class="col-md-2">
+		
+		<%= select_tag(:sid, :options => ForumHelper.get_forums_for_select ) %>
+	</div>
+	<div class="col-md-2"><%= text_field_tag :fname %></div>
+	<div class="col-md-2"><%= text_field_tag :fid %></div>
+	<div class="col-md-2"><%= text_field_tag :pfid %></div>
+</div>
+<%= submit_tag "add" %>
+<% end %>

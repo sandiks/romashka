@@ -1,0 +1,44 @@
+<%= partial 'shared/forums' %>
+<% for user in @thread_users %>
+|| <%= link_to "#{user[1]} (#{user[2]})"  , url_for(:thread, :by_user, :id => params[:id], :uid => user[0]) %>
+
+<% end %>
+<%= partial 'shared/page_nav', :object => {:count=>@responses+1, :url=>@url, :page => @page} %>
+<% @posts.each_with_index do |item, ind| %>
+<div class="msg-hdr" data-get-automod-url="/rs/message/<%= item.mid %>/automod" data-msg-id="<%= item.mid %>">
+	<div class="subj">
+		<span class="subj-text">
+			<%= "#{ind}| #{item.title}" %>
+		</span>
+	</div>
+	
+</div>
+<table width="100%" border="0" cellspacing="0">
+	<tbody>
+		<tr>
+			
+			<td class="ii hdr-label">От:</td>
+			<td class="i nick-cell">
+				<a class="hdr profile-tip" title="<%= item.addedby %>" target="_blank" href="http://rsdn.ru/Forum/MsgUList.aspx?uid=<%= item.addeduid %>&start=1" rel="/account/shortinfo/<%= item.addeduid %>">
+					<%= item.addedby %>
+				</a>
+				
+			</td>
+			<td class="i home-page" rowspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td class="ii" nowrap=""><font size="2"><b>Дата:&nbsp;</b></font></td>
+			<td class="i" width="100%"><font size="2"><%= item.addeddate.strftime("%F %k:%M ") %></font></td>
+		</tr>
+		<tr class="rate-row">
+			<td class="ii rate-row-title">Оценка:</td>
+			<td class="i msg-rate" colspan="2">
+				<%= item.marks %>
+			</td>
+		</tr>
+		
+	</tbody>
+</table>
+<%= item.body.gsub('http://www.rsdn.ru/forum','').html_safe %>
+<% end %>
+<%= partial 'shared/page_nav', :object => {:count=>@responses+1, :url=>@url, :page => @page} %>

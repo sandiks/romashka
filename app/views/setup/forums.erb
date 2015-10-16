@@ -1,0 +1,31 @@
+<% for item in Sites.all %>
+<a href="/setup/forums/<%= item.id %>"><%= item.name %></a>
+<br />
+<% end %>
+
+<table style="width:50%">
+	<tr>
+		<th>name</th>
+		<th>fid</th>
+		<th>level</th>
+		<th>action</th>
+		
+	</tr>
+	<% for @item in @forums %>
+	<tr>
+		<td>
+			<b><%= @item.name %></b>
+		</td>
+		<td><%= @item.fid %></td>
+		<td><%= @item.level %></td>
+		<td>
+			<% if @item.check==1 %>
+			<a href="/setup/checkforum/<%= @item.siteid %>/<%= @item.fid %>/0">enabled</a>
+			<% else %>
+			<a href="/setup/checkforum/<%= @item.siteid %>/<%= @item.fid %>/1" style="color:red">disabled</a>
+			<% end %>
+		</td>
+		
+	</tr>
+	<% end %>
+</table>

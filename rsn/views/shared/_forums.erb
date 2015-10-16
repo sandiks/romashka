@@ -1,0 +1,19 @@
+<a href="/bot/site/2">all</a>
+<table style="width:90%;">
+	<tr>
+		<% Forums.filter('siteid=2 and parent_fid>0').all.group_by{|h| h[:parent_fid]}.sort_by{ |k,v| k }.each do |gr, forums| %>
+		<td valign="top">
+			<ul>
+				<% for item in forums.sort_by{ |f| f.fid } %>
+						
+						<li>
+						<a href="/bot/rsn/<%= item.fid %>">+</a>
+						<a href="/rsn/forum/<%= item.fid %>"><%= item.name %></a> 
+						</li> 
+					
+				<% end %>
+			</ul>
+		</td>
+		<% end %>
+	</tr>
+</table>

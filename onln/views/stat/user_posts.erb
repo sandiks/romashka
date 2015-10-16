@@ -1,0 +1,65 @@
+<table style="width:80%;">
+	<tbody>
+		
+		<% @posts.group_by{|h| h[:tid]}.each do |tid, thread_posts| %>
+		<tr style="vertical-align:top;border: 1px solid gray;height: 25px;">
+			<td class="msgBody">
+				<span onclick="$(this).next().next().toggle();"><a class="Clicable"><%= @threads[tid] %> </a> <%=thread_posts.size.to_s %></span>
+				<% if thread_posts.size>=20  %>
+					<a href="/onln/thread/<%= tid %>/all">open</a>
+					<%else %>
+					<div></div>
+				<% end %>
+
+				<div style="display: none; cursor: default; border: 1px solid blue;">
+					
+					<% if thread_posts.size<20  %>
+
+					<ul class="b-messages-thread">
+						<% thread_posts.each do |item| %>
+						<li class="msgpost">
+							<div class="b-mtauthor">
+								<div class="b-mtauthor-i">
+									<big class="mtauthor-nickname"><a><%= item.addedby %></a><i class="sh"></i>
+									<span class="sts-prof">Senior Member</span>            </big>
+									
+									<div class="ava">
+										<table cellpadding="0" cellspacing="0" border="0">
+											<tbody><tr><td class="ava-box">
+												<a href="https://profile.onliner.by/user/<%= item.addeduid %>"><img src="/avatar/80x80/<%= item.addeduid %>"></a>
+											</td></tr>
+										</tbody></table>
+									</div>
+									
+								</div>
+							</div>
+							
+							<div class="b-msgpost-txt">
+								<div class="msgpost-txt-i">
+									<div style="margin-bottom:0.3em; font-size:85%">
+										<a href="/viewforum.php?f=">>></a>
+										→
+										<a href='<%= "http://forum.onliner.by/viewtopic.php?t=#{item.tid}&p=#{item.mid}#p#{item.mid}" %>'><b>>><%= @threads[item.tid] %></b></a>
+									</div>
+									<small class="msgpost-date"><%= item.addeddate.strftime("%F %k:%M ") %></small>
+									
+									<div class="content" id="message_<%= item.mid %>">
+										<%= item.body.gsub('./images','/images').html_safe %>
+									</div>
+									
+								</div>
+							</div>
+						</li>
+						
+						<% end %>
+					</ul>
+
+					<% end %>
+				</div>
+			</td>
+		</tr>
+		<% end %>
+		
+		
+	</tbody>
+</table>

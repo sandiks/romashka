@@ -1,0 +1,31 @@
+<% for forum in @mforums %>
+<div style="margin-top:20px;">
+	<div style="color:red;">
+		<%= forum.title %>
+	</div>
+	<table class="forumTable" style="width:90%;">
+		<tbody>
+			<tr>
+				
+				<th>Тема</th>
+				<th style="width:5%">Ответов</th>
+				<th style="width:15%;text-align:center">Дата</th>
+				<th style="width:15%">Сайт</th>
+				<th style="width:15%">Форум</th>
+			</tr>
+			
+			<% for thread in @mforums_threads[forum.mfid] %>
+			<tr>
+				<td class="postslisttopic">
+					<a href="<%= ForumHelper.get_real_thread_url(thread.siteid,thread.fid,thread.tid) %>"><%= thread.title %></a>
+				</td>
+				<td style="text-align:center"><%= thread.responses %></td>
+				<td style="text-align:center"><%= thread.updated.strftime("%F %k:%M ") %></td>
+				<td><%= ForumHelper.get_site_name(thread.siteid) %></td>
+				<td><%= ForumHelper.get_forum_name(thread.fid,thread.siteid) %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<% end %>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>main</title>
+		<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+		<link href="/stylesheets/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="/stylesheets/bootstrap-theme.min.css" rel="stylesheet">
+		<link href="/stylesheets/yamm.css" rel="stylesheet">
+	</head>
+	<body>
+		
+		<div class="navbar yamm navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a href="#" class="navbar-brand">Четкий форум</a>
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+					</button>
+				</div>
+				<div class="navbar-collapse collapse" id="navbar-main">
+					<ul class="nav navbar-nav">
+						
+						<li <%= request.route_obj.action.to_s == 'index' ? 'class=active' : '' %> ><a href="/forum">main</a></li>
+						
+						<li><a href="/rsn/forum">rsdn.ru</a></li>
+						<li><a href="/lor/forum">linux.org.ru</a></li>
+						<li><a href="/gamedev/forum">gamedev.ru</a></li>
+						<li><a href="/sqlru/forum">sql.ru</a></li>
+					
+						
+						<li id="chatSwitcher" class="dropdown"><a href="#" class="dropdown-toggle">чат<b class="caret"></b></a>
+						
+					</li>
+				</ul>
+				<div class="navbar-right">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		
+		<div style="margin-left: 20px;margin-top: 65px;">
+	
+			<%= yield %>
+		</div>
+
+	</div>
+	<script src="/javascripts/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<a href="/bot/site/3">all</a>
+<table style="width:90%;">
+	<tr>
+	<td valign="top">
+	<ul>
+
+		<% @forums.each do |f| %>
+		<li>
+			<a href="/bot/lor/<%= f.fid %>">+++</a>
+			<a href="/lor/forum/<%= f.fid %>"><%= f.name %> </a>
+					
+		</li>
+		<% end %>
+	</ul>
+	</td>
+	</tr>
+</table>

@@ -1,0 +1,47 @@
+<%= partial 'shared/forums' %>
+
+
+<% @posts.group_by{|h| h[:fid]}.each do |fid, forum_posts| %>
+---<b><%= @forums[fid]  %></b>
+<br />
+<% forum_posts.group_by{|h| h[:smid]}.each do |smid, thread_posts| %>
+<span onclick="$(this).next().toggle();"> <%= @topics[smid][:title] %> <%=thread_posts.size.to_s %> 
+
+</span>
+<div style="display: none; margin-left: 10px; ">
+	<% thread_posts.each_with_index do |item, ind| %>
+	
+	<div class="msg-hdr" data-get-automod-url="/rs/message/<%= item.mid %>/automod" data-msg-id="<%= item.mid %>">
+		<div class="subj">
+			<span class="subj-text">
+			<%= "#{ind}| #{item.title}" %>
+			</span>
+		</div>
+		
+	</div>
+	<table width="100%" border="0" cellspacing="0">
+		<tbody>
+			<tr>
+				
+				<td class="ii hdr-label">От:</td>
+				<td class="i nick-cell">
+					<a class="hdr profile-tip" title="<%= item.addedby %>" target="_blank" href="http://rsdn.ru/Forum/MsgUList.aspx?uid=<%= item.addeduid %>&start=1" rel="/account/shortinfo/<%= item.addeduid %>">
+						<%= item.addedby %>
+					</a>
+					
+				</td>
+				<td class="i home-page" rowspan="2">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="ii" nowrap=""><font size="2"><b>Дата:&nbsp;</b></font></td>
+				<td class="i" width="100%"><font size="2"><%= item.addedat.strftime("%F %k:%M ") %></font></td>
+			</tr>
+		</tbody>
+	</table>
+	<%= item.text.gsub('http://www.rsdn.ru/forum','').html_safe %>
+	<% end %>
+</div>
+</br>
+</br>
+<% end %>
+<% end %>

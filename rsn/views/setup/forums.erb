@@ -1,0 +1,20 @@
+<table>
+	<% for @item in Forums.order(:fid) %>
+	<tr>
+		<td>
+			<b><%= @item.name %></b>
+		</td>
+		<td>
+			<% if @item.check==1 %>
+			<a href="/setup/checkforum/<%= @item.fid %>/0">enabled</a>
+			<% else %>
+			<a href="/setup/checkforum/<%= @item.fid %>/1" style="color:red">disabled</a>
+			<% end %>
+		</td>
+		<td>
+			<%= @item.forum_group %>
+		</td>
+		
+	</tr>
+	<% end %>
+</table>

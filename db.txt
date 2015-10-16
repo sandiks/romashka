@@ -1,0 +1,6 @@
+
+site	fid	forum name
+2			59	job.offers
+2			92	job.offers.ea
+6			240	job-offers
+3			95	job

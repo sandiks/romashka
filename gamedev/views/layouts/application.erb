@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <title><%=@title%></title>
+    
+    <link href="/gamedev/stylesheets/main.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/gamedev/javascripts/skif.js"></script>
+    <script type="text/javascript" src="/gamedev/javascripts/gamedev.js"></script>
+  </head>
+  <body>
+    <div style="margin-left: 20px;margin-top: 15px;">
+      updated: 
+      <a href="/stat/recent_posts">recent</a>
+      <a href="/gamedev/forum/list">all forums</a>
+      <a href="/forum">main</a>
+    </div>
+    <div style="margin-left: 20px;margin-top: 15px;">
+      <%= yield %>
+    </div>
+  </body>
+</html>

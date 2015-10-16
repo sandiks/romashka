@@ -1,0 +1,36 @@
+<ul class="b-messages-thread">
+	<% @posts.each do |item| %>
+	<li class="msgpost">
+		<div class="b-mtauthor">
+			<div class="b-mtauthor-i">
+				<big class="mtauthor-nickname"><a><%= item.addedby %></a><i class="sh"></i>
+				<span class="sts-prof">Senior Member</span>            </big>
+				
+				<div class="ava">
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tbody><tr><td class="ava-box">
+							<a href="https://profile.onliner.by/user/<%= item.addeduid %>"><img src="/user/avatar/80x80/<%= item.addeduid %>"></a>
+						</td></tr>
+					</tbody></table>
+				</div>
+				
+			</div>
+		</div>
+		
+		<div class="b-msgpost-txt">
+			<div class="msgpost-txt-i">
+				<div style="margin-bottom:0.3em; font-size:85%">
+					<a href='<%= "http://forum.onliner.by/viewtopic.php?t=#{item.tid}&p=#{item.mid}#p#{item.mid}" %>'><b><%= @thread.title %></b></a>
+				</div>
+				<small class="msgpost-date"><%= item.addeddate.strftime("%F %k:%M ") %></small>
+				
+				<div class="content" id="message_<%= item.mid %>">
+					<%= item.body.gsub('./images','/images').html_safe %>
+				</div>
+				
+			</div>
+		</div>
+	</li>
+	
+	<% end %>
+</ul>

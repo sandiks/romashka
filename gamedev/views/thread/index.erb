@@ -1,0 +1,27 @@
+
+
+<div id="main_body" style="height: 1%;">
+	<%= partial 'shared/page_nav', :object => {:count=>@responses+1, :url=>@url, :page => @page} %>
+	
+	<% @posts.each_with_index do |item, ind| %>
+	<div id="m1" class="mes">
+		<table class="mes">
+		<tbody>
+		<tr>
+			<th><b><a href="http://www.gamedev.ru/users/?id=<%= item.addeduid %>" title=""><%= item.addedby %></a></b></th>
+			<td class="level">Постоялец</td>
+			<td class="center">www</td>	
+			<td style="width: 100px"><%= item.addeddate.strftime("%F %k:%M ") %></td>
+			<td></td>
+			<td><i><a href="/gamedev/thread/" title="Ссылка на 1-е сообщение">#1</a></i></td>
+			</tr></tbody>
+		</table>
+		<div class="block">
+			<%= item.body.html_safe %>
+		</div>
+	</div>
+	
+	
+	<% end %>
+	<%= partial 'shared/page_nav', :object => {:count=>@responses+1, :url=>@url, :page => @page} %>
+</div>

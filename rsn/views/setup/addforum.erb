@@ -1,0 +1,9 @@
+<div class="tabs-content">
+	<% form_tag  url(:setup, :addforum)  do  %>
+		forum id : <%= text_field_tag :fid %>
+		<br />
+		forum name : <%= text_field_tag :fname %>
+		<br />
+		<%= submit_tag "add" %>
+	<% end %>
+</div>
