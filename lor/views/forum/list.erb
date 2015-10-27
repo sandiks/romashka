@@ -20,7 +20,7 @@
 			<% for item in topics.take(5) %>
 			<tr>
 				<td class="postslisttopic">
-					<a href="/lor/thread/<%= item.tid %>/1"><%= item.title %></a>
+					<a href="<%= ForumHelper.get_real_thread_url(3,item.fid,item.tid) %>"><%= item.title %></a>
 					<%= partial 'shared/page_nav_small', :object => {:count=>item.responses+1, :url=>"/lor/thread/#{item.tid}" } %>
 				</td>
 				<td style="text-align:center"><%= item.responses %></td>

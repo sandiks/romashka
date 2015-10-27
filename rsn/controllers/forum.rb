@@ -8,13 +8,6 @@ FbotWeb::Rsn.controllers :forum do
     render 'list'
   end
 
-  get :list do
-    LogHelper.log_req(request)
-    @title = "rsn::forums:list"
-    @forums = Forums.filter(siteid:2, level: 1).order(:bot_updated).all
-    render 'list'
-  end
-
   get :dl do
     #LogHelper.log_req(request)
 
