@@ -1,4 +1,4 @@
-<% for item in Sites.all %>
+<% for item in @sites %>
 <a href="/setup/forums/<%= item.id %>"><%= item.name %></a>
 <br />
 <% end %>

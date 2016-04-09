@@ -17,7 +17,8 @@
 		</td>
 		<td><%= item.fid %></td>
 		<td>
-			<%= @forums.find{|ff| ff.siteid == item.siteid && ff.fid ==item.fid}.name  %>
+			<% ff = @forums.find{|ff| ff.siteid == item.siteid && ff.fid ==item.fid}  %>
+			<%= ff.name unless ff.nil? %>
 		</td>
 		
 	</tr>

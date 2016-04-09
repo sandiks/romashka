@@ -1,21 +1,25 @@
 <%= partial 'shared/forums' %>
 
 <h1 class="title" itemprop="name"><%= @title %></h1>
+<a href="/bot/sqlr/<%= @fid %>">[upd]</a>
 <table class="forumTable">
 	<tbody>
 		<tr>
 			<th style="width:5%">Ответов</th>
 			<th style="width:15%">Дата</th>
 			<th>Тема</th>
+			<th>dwnl</th>
 		</tr>
 		<% for item in @topics %>
 		<tr>
 			<td style="text-align:center"><%= item.responses %></td>
 			<td style="text-align:center" class="altCol"><%= item.updated.strftime("%F %k:%M ") %></td>
 			<td class="postslisttopic">
-				<a href="/sqlru/thread/<%= item.tid %>/1"><%= item.title %></a>
+			
+				<a href='<%= "/sqlru/thread/#{item.tid}/1" %>'><%= item.title %></a>
 				<%= partial 'shared/page_nav_small', :object => {:count=>item.responses+1, :url=>"/sqlru/thread/#{item.tid}" } %>
 			</td>
+			<td style="text-align:center"><a href='<%= "/sqlru/thread/dwnl/#{item.tid}" %>'>dw 10 p</a></td>
 			
 			
 		</tr>

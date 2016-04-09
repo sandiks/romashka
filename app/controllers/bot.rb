@@ -49,7 +49,7 @@ FbotWeb::App.controllers :bot do
   get "/sqlr/:id" do
     fid = params[:id].to_i
 
-    system "cd /home/fbot; ruby sqlr.rb df #{fid}"
+    system "cd '/home/kilk/SpiderOak Hive/proj/fbot'; ruby sqlr.rb df #{fid}"
   end
 
 end

@@ -11,9 +11,11 @@ FbotWeb::App.controllers :setup do
 
   get :forums, :with => [:id] do
     @title = "setup::forums"
-    sid = params[:id]
+    sid = params[:id].to_i
 
-    @forums = Forums.where(siteid:sid).order(:fid).all
+    #@forums = Forums.where(siteid:sid).order(:fid).all
+    @forums =  FbotWeb::App.cache['fbot_forums'].select { |ff| ff.siteid == sid  }
+    @sites = FbotWeb::App.cache['fbot_sites']
     render 'forums'
   end
   
