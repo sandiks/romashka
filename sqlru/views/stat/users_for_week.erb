@@ -4,12 +4,11 @@
 		<tr style="vertical-align:top">
 			<% @posts.each_with_index do |post,ind|  %>
 			<td class="msgBody" style="width:25%;">
-				<%= @dates[ind] %>(<%= post.size %>)<br/>
+				<b><%= @dates[ind].strftime("%F %k:%M:%S ") %></b>(<%= post.size %>)<br/>
 				<% post.group_by{|h| h[:addedby]}.sort_by{|k,v| -v.size}.take(80).each do |k,v| %>
 				<% uid = v.first[:addeduid] %>
-				<% q = @quotes[ind][uid]  %>
 				<%= link_to k, url_for(:stat, :user_posts,:id => uid,:date=> @dates[ind]) %>
-				<%= "(#{v.size}/#{q})".html_safe %>
+				<%= "(#{v.size})".html_safe %>
 				
 				<br />
 				<% end %>

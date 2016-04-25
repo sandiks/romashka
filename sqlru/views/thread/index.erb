@@ -16,6 +16,7 @@ $(function(){
 });
 });
 </script>
+<%= partial 'show/dialog' %>
 
 <% for user in @thread_users %>
 || <%= link_to "#{user[1]} (#{user[2]})"  , url_for(:thread, :by_user, :id => params[:id], :uid => user[0]) %>
@@ -25,12 +26,12 @@ $(function(){
 <%= partial('shared/page_nav', :object => {:count=>@responses, :url=>@url, :page => @page})   %>
 <%= @pages_count %>
 
-<% for item in @posts %>
+<% @posts.each_with_index do |item,ind| %>
 
-<table class="msgTable" style="width:75%">
+<table class="msgTable" style="width:90%">
 	<tbody>
 		<tr>
-			<td id="id<%= item.mid %>" class="messageHeader" colspan="2"><img src="/images/message.gif" alt=""><%= @thread_title %>
+			<td id="id<%= item.mid %>" class="messageHeader" colspan="2"><img src="/images/message.gif" alt=""><%= ind %>: <%= @title %>
 			</td>
 		</tr>
 		<tr style="vertical-align:top">
@@ -43,10 +44,17 @@ $(function(){
 				Сообщений: <br></span>
 				
 			</td>
-			<td class="msgBody"><%= item.body.gsub('http://www.sql.ru/forum','').html_safe %></td>
+			<% 
+			bb = item.body
+			bb.gsub!("=\"/forum/actualfile.aspx","=\"http://www.sql.ru/forum/actualfile.aspx")
+
+			 %>
+			<td class="msgBody"><%= bb.html_safe %></td>
 		</tr>
 		<tr>
-			<td colspan="2" class="msgFooter"><%= item.addeddate.strftime("%F %k:%M ") %> <a href="http://www.sql.ru/forum/actualutils.aspx?action=gotomsg&tid=<%= item.tid %>&msg=<%= item.mid %>">orig</a>
+			<td colspan="2" class="msgFooter"><%= item.addeddate.strftime("%F %k:%M ") %> <a href="http://www.sql.ru/forum/actualutils.aspx?action=gotomsg&tid=<%= item.tid %>&msg=<%= item.mid %>">orig</a>||
+			<button class="btn_post" data-tid="<%= item.tid %>" data-mid="0">post</button>
+			<button class="btn_post_q" data-tid="<%= item.tid %>" data-mid="<%= item.mid %>">post q</button>
 		</td>
 	</tr>
 </tbody>

@@ -1,14 +1,8 @@
-<script>
-$(function(){
-	$(".user_post_time").click(function() {
-	$(this).next().toggle();
-	})
-});
-</script>
+
 
 <% (0..DateTime.now.hour).each do |h| %>
 
-<%= link_to "==#{h}", url_for(:stat, :show_today_users, :h=> h ) %>
+<%= link_to "==#{h}", url_for(:stat, :today_users_posts, :h=> h ) %>
 <%end%>
 <br />
 <% @posts.group_by{|h| h[:addedby]}.sort_by{|k,v| -v.size}.each do |k,v| %>
@@ -17,26 +11,14 @@ $(function(){
 		
 		<tr style="vertical-align:top">
 			<td style="width:15%" class="msgBody">
-				<%= link_to k, url(:stat, :user_today_posts,:id => v.first[:addeduid]) %>
-				(<%= v.size %>/<%= @user_quotes[v.first[:addeduid]] %>)
+				<%= link_to k, url(:stat, :today_users_posts,:id => v.first[:addeduid]) %>
+				(<%= v.size %>)
 			</td>
 			<td class="msgBody">
 				<% v.each  do |post|%>
 				<% vv = post[:addeddate].strftime("%k:%M")  %>
 				<%= "<span class='user_post_time'>#{vv} |</span>".html_safe %>
-				<table class="msgTable" style="display: none">
-					<tbody>
-						<tr>
-							<td id="id13237113" class="messageHeader" colspan="2">
-								<img src="/forum/images/message.gif" alt=""><%= @threads[post[:tid]] %>
-							</td>
-						</tr>
-						<tr style="vertical-align:top">
-							<td class="msgBody"><%= post[:text].gsub('http://www.sql.ru/forum','').html_safe %>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+				
 				<% end %>
 			</td>
 		</tr>

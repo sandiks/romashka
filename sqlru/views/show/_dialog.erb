@@ -1,0 +1,84 @@
+<script>
+$(function(){
+
+	$("#dialog").dialog({
+		autoOpen: false,
+		width: 450,
+		height: 320,
+    buttons: {
+        "Close": function () {
+            $(this).dialog("close")
+        }
+    }		
+	});
+
+	$('.btn_post').click(function() {
+		//alert( $(this).data('mid') );
+
+		$("#dialog").dialog( "option", "title", 'add message' );
+		$("#dialog input:hidden[name='tid']").val($(this).data('tid'));
+		$("#dialog input:hidden[name='mid']").val($(this).data('mid'));
+		$('#dialog #text').val('');
+		$("#dialog").dialog("open");
+		
+	});
+	$('.btn_post_q').click(function(evt) {
+		//alert( $(this).data('mid') );
+
+		$("#dialog").dialog( "option", "title", 'add message' );
+		$("#dialog input:hidden[name='tid']").val($(this).data('tid'));
+		$("#dialog input:hidden[name='mid']").val($(this).data('mid'));
+	 	var textarea = jQuery('#dialog #text');
+	 	selected = getSelectedText();
+	 	username = $(this).closest('tbody').find('tr>td>a:first').text().trim();
+	 	//username = $(this).parent().parent().prev().find('td>a:first').text().trim();
+
+	 	selected = "[quot "+ username + "]" + selected + "[/quot]";
+    textarea.val(selected);
+    evt.preventDefault();
+
+		$("#dialog").dialog("open");
+		
+	});
+	$('.btn_dlg_post_message').click(function() {
+				var tid = $('#dialog input:hidden[name="tid"]').val();
+		    var mid = $('#dialog input:hidden[name="mid"]').val();
+		    var text = $('#dialog #text').val();
+
+		    $.post("/sqlru/16/post_msg",{ fid:16,tid:tid,mid:mid, text:text})
+		    .done(function(data) {
+           //alert("Data Loaded: " + data);
+        });
+
+	});	
+
+					
+
+});
+
+// Get user selection text on page
+function getSelectedText() {
+    if (window.getSelection) {
+        return window.getSelection();
+    }
+    else if (document.selection) {
+        return document.selection.createRange().text;
+    }
+    return '';
+}
+
+</script>
+
+<div id="dialog" title="Basic dialog">
+<div class="row">
+	<label for="title"></label>
+</div>
+
+<div class="row">
+	<label for="message">Your message:</label><br />
+	<textarea id="text" class="input" name="message" rows="10" cols="50"></textarea><br />
+</div>
+<button class="btn_dlg_post_message">send message</button>
+<input type="hidden" name="tid" value="">
+<input type="hidden" name="mid" value="">
+</div>

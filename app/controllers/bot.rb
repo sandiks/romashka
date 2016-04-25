@@ -31,7 +31,9 @@ FbotWeb::App.controllers :bot do
     fid = params[:id].to_i
 
     #Process.detach( fork{ exec "cd /home/fbot; ruby #{sites[sid]}.rb all"} )
-    system "cd /home/fbot; ruby rsn.rb df #{fid}"
+    system "cd '/home/kilk/SpiderOak Hive/proj/fbot'; ruby rsn.rb df #{fid}"
+    redirect "/rsn/forum" 
+
   end
 
   get "/lor/:id" do
@@ -50,6 +52,8 @@ FbotWeb::App.controllers :bot do
     fid = params[:id].to_i
 
     system "cd '/home/kilk/SpiderOak Hive/proj/fbot'; ruby sqlr.rb df #{fid}"
+
+    #redirect "/sqlru/forum/#{fid}" 
   end
 
 end

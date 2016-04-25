@@ -25,7 +25,7 @@ gem 'redis'
 # Test requirements
 
 # Padrino Stable Gem
-gem 'padrino', '0.12.5'
+gem 'padrino'
 
 # Or Padrino Edge
 # gem 'padrino', :github => 'padrino/padrino-framework'

@@ -8,7 +8,7 @@ $(function(){
 
 <% (0..DateTime.now.hour).each do |h| %>
 
-<%= link_to "==#{h}", url_for(:stat, :show_today_users, :h=> h ) %>
+<%= link_to "==#{h}", url_for(:stat, :today_users_posts, :h=> h ) %>
 <%end%>
 <br />
 
@@ -19,8 +19,8 @@ $(function(){
 		
 		<tr style="vertical-align:top">
 			<td style="width:15%" class="msgBody">
-				<%= link_to k, url(:stat, :user_today_posts,:id => uposts.first[:addeduid]) %>
-				(<%= uposts.size %>/<%= @user_quotes[uposts.first[:addeduid]] %>)
+				<%= link_to k, url(:stat, :today_users_posts,:id => uposts.first[:addeduid]) %>
+				(<%= uposts.size %>)
 			</td>
 			<td class="msgBody">
 				<% uposts.group_by{|h| h[:tid]}.each do |tid, thread_posts| %>
@@ -41,7 +41,7 @@ $(function(){
 									<%= item.addedby %> </a><br>
 									
 								</td>
-								<td class="msgBody"><%= item.text.gsub('http://www.sql.ru/forum','').html_safe %></td>
+								<td class="msgBody"><%= item.body.gsub('http://www.sql.ru/forum','').html_safe %></td>
 							</tr>
 							<tr>
 								<td colspan=2 class="msgFooter"><%= item.addeddate.strftime("%F %k:%M ") %> <a href="http://www.sql.ru/forum/actualutils.aspx?action=gotomsg&tid=<%= item.tid %>&msg=<%= item.mid %>">orig</a>
