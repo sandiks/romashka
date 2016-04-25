@@ -15,7 +15,7 @@ auto last viewed <%= @auto_last_viewed.strftime("%F %k:%M ") %>
 				<div style="display: none; cursor: default; border: 1px solid blue;">
 					
 					<% thread_posts.each do |item| %>
-						<%= partial 'show/post', :object => item %>
+						<%= partial 'shared/post', :object => item %>
 					<% end %>
 			</div>
 		</td>

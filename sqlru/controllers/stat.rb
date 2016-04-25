@@ -44,7 +44,7 @@ FbotWeb::Sqlru.controllers :stat do
     @posts = Posts.filter('siteid=? and addeddate > ? ',6, from).order(:addeddate).all
 
 
-    render 'posts_by_thread'
+    render 'posts_grouped_by_thread'
   end
 
   get :today_users_posts do
