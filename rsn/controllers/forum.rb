@@ -25,7 +25,7 @@ FbotWeb::Rsn.controllers :forum do
     LogHelper.log_req(request)
     forum = Forums.first(siteid:2, fid: params[:id])
     @title = forum.name
-    @topics = Threads.filter(siteid:2, fid: params[:id]).reverse_order(:updated).all
+    @topics = Threads.filter(siteid:2, fid: params[:id]).reverse_order(:updated).extension(:pagination).paginate(1, 30).all
 
     render 'index'
   end

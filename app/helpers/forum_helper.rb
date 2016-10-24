@@ -18,14 +18,14 @@ module ForumHelper
   end
 
   def self.get_real_thread_url(sid, fid, tid, page=1)
-    site_names = ['','','rsn','lor','gamedev', 'onln', 'sqlru']
+    site_names = ['','','rsn','lor','gamedev', 'onln', 'sqlru','7','8','bitcointalk']
   
     fname = get_forum_name_for_url(fid,sid)
     fname = fid if fname.nil?
 
     case sid
     when 2
-      "http://rsdn.ru/forum/#{fname}/#{tid}.flat.#{page}"
+      "http://rsdn.org/forum/#{fname}/#{tid}.flat.#{page}"
     when 3 
       pp = page>1 ? "/page#{page-1}" : "" 
       "http://www.linux.org.ru/forum/#{fname}/#{tid}#{pp}"

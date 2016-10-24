@@ -16,7 +16,7 @@
 				
 				<th style="width:25%">Дата</th>
 			</tr>
-			<% topics = Threads.filter(:fid=>forum.fid).reverse_order(:updated).all%>
+			<% topics = Threads.filter(:fid=>forum.fid).reverse_order(:updated)%>
 			<% for item in topics.take(5) %>
 			<tr>
 				<td class="postslisttopic">

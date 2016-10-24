@@ -3,16 +3,9 @@
 <table style="width:90%;">
 	<tr>
 	<td valign="top">
-	<ul>
-
 		<% Forums.filter(siteid:6, check:1).each do |f| %>
-		<li>
-			<a href="/bot/sqlr/<%= f.fid %>">+</a>
-			<a href="/sqlru/forum/<%= f.fid %>"><%= f.name %> </a>
-			
-		</li>
+			||<a href="/sqlru/forum/<%= f.fid %>"><%= f.name %> </a>
 		<% end %>
-	</ul>
 	</td>
 	</tr>
 </table>

@@ -20,7 +20,7 @@
 									<%= item.addedby %> </a><br>
 									
 								</td>
-								<td class="msgBody"><%= item.text.gsub('http://www.sql.ru/forum','').html_safe %></td>
+								<td class="msgBody"><%= item.body.gsub('http://www.sql.ru/forum','').html_safe %></td>
 							</tr>
 							<tr>
 								<td colspan=2 class="msgFooter"><%= item.addeddate.strftime("%F %k:%M ") %> <a href="http://www.sql.ru/forum/actualutils.aspx?action=gotomsg&tid=<%= item.tid %>&msg=<%= item.mid %>">orig</a>

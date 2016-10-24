@@ -19,7 +19,7 @@
 			
 			<td class="ii hdr-label">От:</td>
 			<td class="i nick-cell">
-				<a class="hdr profile-tip" title="<%= item.addedby %>" target="_blank" href="http://rsdn.ru/Forum/MsgUList.aspx?uid=<%= item.addeduid %>&start=1" rel="/account/shortinfo/<%= item.addeduid %>">
+				<a class="hdr profile-tip" title="<%= item.addedby %>" target="_blank" href="http://rsdn.org/Forum/MsgUList.aspx?uid=<%= item.addeduid %>&start=1" rel="/account/shortinfo/<%= item.addeduid %>">
 					<%= item.addedby %>
 				</a>
 				
@@ -39,6 +39,6 @@
 		
 	</tbody>
 </table>
-<%= item.body.gsub('http://www.rsdn.ru/forum','').html_safe %>
+<%= item.body.gsub('http://www.rsdn.org/forum','').html_safe %>
 <% end %>
 <%= partial 'shared/page_nav', :object => {:count=>@responses+1, :url=>@url, :page => @page} %>

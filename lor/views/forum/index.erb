@@ -14,7 +14,8 @@
 			<td style="text-align:center" class="altCol"><%= item.updated.strftime("%F %k:%M ") %></td>
 			<td class="postslisttopic">
 				<a href="<%= ForumHelper.get_real_thread_url(3,item.fid,item.tid) %>"><%= item.title %></a>
-				<%= partial 'shared/page_nav_small', :object => {:count=>item.responses+1, :url=>"/lor/thread/#{item.tid}" } %>
+				<% last_page = (item.responses+1)/50 +((item.responses+1)%50 !=0 ? 1 : 0) %>
+				<a class="pages" href="<%= ForumHelper.get_real_thread_url(3,item.fid,item.tid,last_page) %>"><%= last_page %></a>
 			</td>
 			
 			

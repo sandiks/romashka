@@ -61,5 +61,11 @@ module FbotWeb
     #     render 'errors/500'
     #   end
     #
+    set :protection, true
+    set :protect_from_csrf, false
+    set :allow_disabled_csrf, true
+
+    post :forum, :csrf_protection => false  do
+    end
   end
 end

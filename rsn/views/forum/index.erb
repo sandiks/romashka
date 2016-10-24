@@ -16,10 +16,10 @@
 			<td class="postslisttopic">
 				<a href="/bot/site/2/dt/<%= item.tid %>">+++</a>
 				<a href="<%= ForumHelper.get_real_thread_url(2,item.fid,item.tid) %>"><%= item.title %></a>
-				<%= partial 'shared/page_nav_small', :object => {:count=>item.responses+1, :url=>"/rsn/thread/#{item.tid}" } %>
+				<% last_page = (item.responses+1)/20 +((item.responses+1)%20 !=0 ? 1 : 0) %>
+				<a class="pages" href="<%= ForumHelper.get_real_thread_url(2,item.fid,item.tid,last_page) %>"><%= last_page %></a>
 			</td>
-			
-			
+
 		</tr>
 		<% end %>
 	</tbody>

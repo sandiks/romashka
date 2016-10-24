@@ -15,7 +15,7 @@ FbotWeb::Lor.controllers :forum do
     @forums = Forums.filter(siteid:3).order(:fid).all
     forum = Forums.first(siteid:3, fid: params[:id])
     @title = forum.name
-    @topics = Threads.filter(siteid:3, fid:params[:id]).reverse_order(:updated).all
+    @topics = Threads.filter(siteid:3, fid:params[:id]).reverse_order(:updated).extension(:pagination).paginate(1, 50).all
 
     render 'index'
   end

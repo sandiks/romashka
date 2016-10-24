@@ -16,40 +16,24 @@ $(function(){
 });
 });
 </script>
+<%= partial 'show/dialog' %>
 
 <% for user in @thread_users %>
 || <%= link_to "#{user[1]} (#{user[2]})"  , url_for(:thread, :by_user, :id => params[:id], :uid => user[0]) %>
 
 <% end %>
 
+<br />
+<a href='<%= "/sqlru/thread/#{@tid}/users_time/@uid" %>'>users times</a>
+
+<br />
 <%= partial('shared/page_nav', :object => {:count=>@responses, :url=>@url, :page => @page})   %>
-<%= @pages_count %>
 
-<% for item in @posts %>
+<br />
+<a href='<%= "/sqlru/rthread/#{@tid}/p/1" %>'>from first</a>
 
-<table class="msgTable" style="width:75%">
-	<tbody>
-		<tr>
-			<td id="id<%= item.mid %>" class="messageHeader" colspan="2"><img src="/images/message.gif" alt=""><%= @thread_title %>
-			</td>
-		</tr>
-		<tr style="vertical-align:top">
-			<td style="width:15%" class="msgBody">
-				<a href="http://www.sql.ru/forum/memberinfo.aspx?mid=<%= item.addeduid %>" class="addedby">
-				<%= item.addedby %> </a><br>
-				<font style="color:#888;">Member</font><br>
-				<br>
-				<span class="smallInfo">Откуда: <br>
-				Сообщений: <br></span>
-				
-			</td>
-			<td class="msgBody"><%= item.body.gsub('http://www.sql.ru/forum','').html_safe %></td>
-		</tr>
-		<tr>
-			<td colspan="2" class="msgFooter"><%= item.addeddate.strftime("%F %k:%M ") %> <a href="http://www.sql.ru/forum/actualutils.aspx?action=gotomsg&tid=<%= item.tid %>&msg=<%= item.mid %>">orig</a>
-		</td>
-	</tr>
-</tbody>
-</table>
+<% @posts.each_with_index do |item,ind| %>
+	<%= ind %>
+	<%= partial 'shared/post', :object => item %>
 <% end %>
 <%= partial('shared/page_nav', :object => {:count=>@responses, :url=>@url, :page => @page}) if @show_pagination  %>
