@@ -1,0 +1,17 @@
+<script>
+
+	function update() {
+ 			$.get("/sqlru/show/get_posts",
+        function(data) {
+            $("#posts").html(data.posts);
+        });
+    }
+
+  setInterval(update, 15000);
+  update();
+
+</script>
+<%= partial 'show/dialog' %>
+
+<div id="posts">
+</div>

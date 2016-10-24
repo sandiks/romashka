@@ -1,0 +1,22 @@
+
+
+
+<br />
+<% @posts_time.group_by{|h| h.to_date}.each do |k,v| %>
+<table class="msgTable">
+	<tbody>
+		
+		<tr style="vertical-align:top">
+			<td style="width:15%" class="msgBody">
+				date:<%= k %>
+			</td>
+			<td class="msgBody">
+				<% v.each  do |ttt|%>
+				  <%= ttt.strftime("%k:%M")  %>
+				<% end %>
+			</td>
+		</tr>
+		
+	</tbody>
+</table>
+<% end %>

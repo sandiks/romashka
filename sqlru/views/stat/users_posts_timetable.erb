@@ -1,0 +1,28 @@
+
+
+<% (0..DateTime.now.hour).each do |h| %>
+
+<%= link_to "==#{h}", url_for(:stat, :users_posts_timetable, :h=> h ) %>
+<%end%>
+<br />
+<% @posts.group_by{|h| h[:addedby]}.sort_by{|k,v| -v.size}.each do |k,v| %>
+<table class="msgTable">
+	<tbody>
+		
+		<tr style="vertical-align:top">
+			<td style="width:15%" class="msgBody">
+				<%= link_to k, url(:stat, :user_posts, id: v.first[:addeduid], date: DateTime.now.new_offset(3/24.0).to_date) %>
+				(<%= v.size %>)
+			</td>
+			<td class="msgBody">
+				<% v.each  do |post|%>
+				<% vv = post[:addeddate].strftime("%k:%M")  %>
+				<%= "<span class='user_post_time'>#{vv} |</span>".html_safe %>
+				
+				<% end %>
+			</td>
+		</tr>
+		
+	</tbody>
+</table>
+<% end %>

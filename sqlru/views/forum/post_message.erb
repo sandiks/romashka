@@ -1,0 +1,15 @@
+
+<div class="tabs-content">
+	<form id="register" action="/sqlru/<%=@fid%>/<%=@tid%>/post_msg/<%=@mid%>" method="post">
+	<input type="hidden" name="title" value="<%= @title%>">
+	<div class="row">
+		<label for="title"><%= @title%></label>
+	</div>
+	
+	<div class="row">
+		<label for="message">Your message:</label><br />
+		<textarea id="text" class="input" name="message" rows="10" cols="50"></textarea><br />
+	</div>
+	<input id="submit_button" type="submit" value="post message" />
+	</form>
+</div>

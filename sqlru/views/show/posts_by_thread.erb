@@ -1,0 +1,27 @@
+<%= partial 'show/dialog' %>
+
+updated by bot <%= @updated.strftime("%F %k:%M ") %>
+<br />
+auto last viewed <%= @auto_last_viewed.strftime("%F %k:%M ") %>
+<br />
+
+<table class="msgTable" style="width:80%;">
+	<tbody>
+		
+		<% @posts.group_by{|h| h[:tid]}.each do |tid, thread_posts| %>
+		<tr style="vertical-align:top">
+			<td class="msgBody">
+				<span onclick="$(this).next().toggle();"><a class="Clicable"><%= @threads[tid] %> </a> <%=thread_posts.size.to_s %></span>
+				<div style="display: none; cursor: default; border: 1px solid blue;">
+					
+					<% thread_posts.each do |item| %>
+						<%= partial 'shared/post', :object => item %>
+					<% end %>
+			</div>
+		</td>
+	</tr>
+	<% end %>
+	
+	
+</tbody>
+</table>
