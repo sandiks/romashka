@@ -78,7 +78,9 @@ FbotWeb::Sqlru.controllers :thread do
     tp = Threads.first(siteid:6, tid: params[:id])
     @title = tp.title
 
-    @posts = Posts.where(siteid:6, tid: params[:id]).where(Sequel.like(:body, '%actualfile.aspx?%')).order(:addeddate).all #extension(:pagination).paginate(@page, 20).all
+    @posts = Posts.where(siteid:6, tid: params[:id]).where(Sequel.like(:body, '%actualfile.aspx?%')).reverse_order(:addeddate).all #extension(:pagination).paginate(@page, 20).all
+    @posts = @posts.select { |pp| SqlRuForumHelper.remove_quoted_from_post(pp[:body]).include? "actualfile.aspx?"  }
+
     @thread_users = Posts.where(siteid:6,:tid => params[:id]).select(:addeduid, :addedby).all
     .group_by{ |p| p[:addeduid] }.sort_by{|k,v| -v.size}.map { |k,v| [k,v.first[:addedby],v.size]  }
 

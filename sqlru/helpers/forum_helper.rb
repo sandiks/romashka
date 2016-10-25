@@ -1,6 +1,7 @@
 require 'net/http'
 require 'cgi'
 require_relative  'tor'
+require 'nokogiri'
 
 module SqlRuForumHelper
 
@@ -98,6 +99,13 @@ tid=#{tid}
     #res = http.request(request)
   end
 
+  def self.remove_quoted_from_post(text)
+    ptext = Nokogiri::HTML.fragment(text)
+    ptext.css('table').each do |node|
+      node.remove
+    end
+    ptext.to_s
+  end
 end
 
 def test

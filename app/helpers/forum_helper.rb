@@ -2,6 +2,8 @@
 
 module ForumHelper
 
+  CRAWLER_DIR="/home/kilk/SpiderOak Hive/proj/0ruby/xcrawlers"
+
   def self.need_dwnl_page(sid, tid, page)
 
     tpages = Tpages.filter(siteid:sid, tid:tid).to_hash(:page,:postcount)

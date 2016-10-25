@@ -27,13 +27,11 @@ end
 			<td style="text-align:center"><%= item.responses %></td>
 			<td style="text-align:center" class="altCol"><%= item.updated.strftime("%F %k:%M ") %></td>
 			<td class="postslisttopic">
-			
 				<a href='<%= "/sqlru/thread/#{item.tid}/p/1" %>'><%= item.title %></a>
 				...<%= calc_page(item.responses)%>
+				<a href='<%= ForumHelper.get_real_thread_url(6,item.fid,item.tid) %>'>[orig]</a>
 			</td>
 			<td style="text-align:center"><a href='<%= "/sqlru/thread/dwnl/#{item.tid}" %>'>dw 10 p</a></td>
-			
-			
 		</tr>
 		<% end %>
 	</tbody>

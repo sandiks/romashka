@@ -11,7 +11,7 @@ FbotWeb::App.controllers :bot do
     
 
     #Process.detach( fork{ exec "cd /home/fbot; ruby #{sites[sid]}.rb all"} )
-    system "cd /home/fbot; ruby #{bot_script_name}.rb all"
+    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby #{bot_script_name}.rb all"
     
   end
 
@@ -22,7 +22,7 @@ FbotWeb::App.controllers :bot do
 
     #p "exec ruby #{sites[sid]}.rb dft #{tid}"
 
-    system "cd /home/fbot; ruby #{bot_script_name}.rb dft #{tid}"
+    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby #{bot_script_name}.rb dft #{tid}"
 
   end
 
@@ -31,7 +31,7 @@ FbotWeb::App.controllers :bot do
     fid = params[:id].to_i
 
     #Process.detach( fork{ exec "cd /home/fbot; ruby #{sites[sid]}.rb all"} )
-    system "cd '/home/kilk/SpiderOak Hive/proj/fbot'; ruby rsn.rb df #{fid}"
+    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby rsn.rb df #{fid}"
     redirect "/rsn/forum" 
 
   end
@@ -39,19 +39,19 @@ FbotWeb::App.controllers :bot do
   get "/lor/:id" do
     fid = params[:id].to_i
 
-    system "cd /home/fbot; ruby lor.rb df #{fid}"
+    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby lor.rb df #{fid}"
   end
 
   get "/gd/:id" do
     fid = params[:id].to_i
 
-    system "cd /home/fbot; ruby gamed.rb df #{fid}"
+    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby gamed.rb df #{fid}"
   end
 
   get "/sqlr/:id" do
     fid = params[:id].to_i
 
-    system "cd '/home/kilk/SpiderOak Hive/proj/fbot'; ruby sqlr.rb df #{fid}"
+    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby sqlr.rb df #{fid}"
 
     #redirect "/sqlru/forum/#{fid}" 
   end
