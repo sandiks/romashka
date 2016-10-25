@@ -35,12 +35,9 @@ FbotWeb::Sqlru.controllers :stat do
   get :show_recent_posts do
 
     #LogHelper.log_req(request)
-
     from = DateTime.now.new_offset(3/24.0) - 2/24.0
-
     @threads = Threads.filter('siteid=? and updated > ?',6, from).to_hash(:tid, :title)
     @posts = Posts.filter('siteid=? and addeddate > ? ',6, from).order(:addeddate).all
-
 
     render 'posts_grouped_by_thread'
   end
@@ -66,13 +63,11 @@ FbotWeb::Sqlru.controllers :stat do
 
 
   get :users_posts_timetable do
-
     #LogHelper.log_req(request)
 
     hh = params[:h]
     now=DateTime.now.new_offset(3/24.0)
     from =  now-0.5
-
     #@threads = Threads.filter('sitedid=? and updated > ?',6, from).to_hash(:tid, :title)
 
     @posts = Posts.filter('siteid=? and addeddate > ? and addeddate < ?',6, from, now)
@@ -80,6 +75,7 @@ FbotWeb::Sqlru.controllers :stat do
     .select(:addeduid, :addedby, :addeddate, :tid).all
 
     render 'users_posts_timetable'
+
   end
 
 end
