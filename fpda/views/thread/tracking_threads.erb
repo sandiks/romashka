@@ -1,0 +1,32 @@
+<%
+def calc_page(resps)
+	pc = resps/25
+	pc+=1 if  resps%25 !=0
+end
+%>
+
+<b><%= @title %></b>
+<br/>
+<table class="forumTable">
+	<tbody>
+		<tr>
+			<th style="width:2%"></th>
+			<th style="width:5%">Ответов</th>
+			<th style="width:15%">Дата</th>
+			<th>Тема</th>
+			<th>dwnl</th>
+		</tr>
+		<% @topics.each_with_index do |item,ind| %>
+		<tr>
+			<td style="text-align:center"><%= ind %></td>
+			<td style="text-align:center"><%= item.responses %></td>
+			<td style="text-align:left" class="altCol"><%= item.updated.strftime("%F %k:%M ") %></td>
+			<td class="postslisttopic">
+				<a href='<%= "/fpda/thread/#{item.tid}/p/1" %>'><%= item.title %></a>
+				...
+			</td>
+			<td style="text-align:center"><a href='<%= "/fpda/thread/dwnl/#{item.tid}" %>'>dw 10 p</a></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

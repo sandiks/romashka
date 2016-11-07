@@ -43,4 +43,6 @@ Padrino.mount('FbotWeb::Sqlru', :app_file => Padrino.root('sqlru/app.rb')).to('/
 Padrino.mount('FbotWeb::Lor', :app_file => Padrino.root('lor/app.rb')).to('/lor')
 
 Padrino.mount('FbotWeb::Onln', :app_file => Padrino.root('onln/app.rb')).to('/onln')
+
+Padrino.mount('FbotWeb::Fpda', :app_file => Padrino.root('fpda/app.rb')).to('/fpda')
 Padrino.mount('FbotWeb::App', :app_file => Padrino.root('app/app.rb')).to('/')

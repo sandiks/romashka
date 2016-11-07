@@ -1,0 +1,11 @@
+<a href="/bot/site/10">all</a>
+
+<table style="width:90%;">
+	<tr>
+	<td valign="top">
+		<% Forums.filter(siteid:10, check:1).each do |f| %>
+			||<a href="/fpda/forum/show/<%= f.fid %>"><%= f.title %> </a>
+		<% end %>
+	</td>
+	</tr>
+</table>

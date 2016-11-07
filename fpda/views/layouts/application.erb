@@ -1,0 +1,30 @@
+<html>
+   <head>
+      <title><%= @title %></title>
+      
+      <script type="text/javascript" src="/sqlru/javascripts/helper.js"></script>
+      <script type="text/javascript" src="/sqlru/javascripts/jquery.min.js"></script>
+      <script type="text/javascript" src="/sqlru/javascripts/jquery-ui.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="/sqlru/stylesheets/layout.css" media="screen" />
+      <link rel="stylesheet" type="text/css" href="/sqlru/stylesheets/actualforum2.css" media="screen" />
+      <link rel="stylesheet" type="text/css" href="/sqlru/stylesheets/jquery-ui.css" media="screen" />
+   </head>
+   <body>
+       <div style="margin-left: 20px;margin-top: 15px;">
+         updated: 
+         <a href="/forum">main</a>
+         <a href="/fpda/forum/list">all forums</a>
+         <a href="/fpda/forum/manage/0">manage</a>
+         <a href="/fpda/forum/tracking_threads">tracking_threads</a>
+         <br />
+         <a href="/fpda/forum/check_tracking_threads">check_tracking_threads</a>
+         ||<a href="/fpda/forum/check_forums">check_forums</a>
+       </div>
+      
+      <div id="page-container">
+         <div id="content-wrapper-forum">
+            <%= yield %>
+         </div>
+      </div>
+   </body>
+</html>

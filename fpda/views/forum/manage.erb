@@ -1,0 +1,30 @@
+<%= partial 'shared/forums' %>
+
+<br/>
+<table class="forumTable" style="width:60%">
+	<tbody>
+		<tr>
+			<th style="width:2%"></th>
+			<th style="width:10%">Дата</th>
+			<th style="width:25%">Категория</th>
+			<th>форум</th>
+			<th>dwnl</th>
+		</tr>
+		<% @forums.each_with_index do |item,ind| %>
+		<tr>
+			<td style="text-align:center"><%= ind %></td>
+			<td style="text-align:left" class="altCol"><%= item.bot_updated.strftime("%F %k:%M ") if item.bot_updated %></td>
+			<td style="text-align:left" class="altCol"><%= item.descr %></td>
+			<td class="postslisttopic">
+				<a href='<%= item.level==1 ? "/fpda/forum/show/#{item.fid}" : "/fpda/forum/manage/#{item.fid}" %>'><%= item.title %></a>
+				...
+			</td>
+			<td style="text-align:center">
+				<a href='<%= "/fpda/forum/check/#{item.fid}" %>'>check</a>
+				<a href='<%= (item.check==1 ? "/fpda/forum/untrack_f/#{item.fid}" : "/fpda/forum/track_f/#{item.fid}") %>'>
+				<%=(item.check==1 ? "untrack" : "track") %></a>
+				</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

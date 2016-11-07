@@ -1,0 +1,38 @@
+<% 
+item = post
+%>
+
+<table class="msgTable" style="width:90%">
+	<tbody>
+		<tr>
+			<td id="id<%= item.mid %>" class="messageHeader" colspan="2"><img src="/images/message.gif" alt=""><%= @threads.nil? ? @title : @threads[item.tid] %>
+			</td>
+		</tr>
+		<tr style="vertical-align:top">
+			<td style="width:15%" class="msgBody">
+				<a href="http://www.sql.ru/forum/memberinfo.aspx?mid=<%= item.addeduid %>" class="addedby">
+				<%= item.addedby %> </a><br>
+				<font style="color:#888;">Member</font><br>
+				<br>
+				<span class="smallInfo">Откуда: <br>
+				Сообщений: <br></span>
+				
+			</td>
+			<% 
+			bb = item.body
+			bb.gsub!("=\"/forum/actualfile.aspx","=\"http://www.sql.ru/forum/actualfile.aspx")
+
+			 %>
+			<td class="msgBody"><%= bb.html_safe %></td>
+		</tr>
+		<tr>
+			<td colspan="2" class="msgFooter">
+			<%= item.addeddate.strftime("%F %k:%M ") %> 
+			<a href="http://4pda.ru/forum/index.php?s=&showtopic=<%= item.tid %>&view=findpost&p=<%= item.mid %>">orig</a>
+			||<a href="/fpda/thread/<%= item.tid %>/p/1">thread</a>
+			
+			<button class="btn_post" data-tid="<%= item.tid %>" data-mid="0">post</button>
+		</td>
+	</tr>
+</tbody>
+</table>

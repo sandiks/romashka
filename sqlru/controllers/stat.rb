@@ -48,7 +48,7 @@ FbotWeb::Sqlru.controllers :stat do
 
     hh = params[:h]
     curr_hour = DateTime.now.new_offset(3/24.0).hour
-    today = DateTime.now.new_offset(3/24.0).beginning_of_day
+    today = DateTime.now.new_offset(3/24.0).to_date
 
     from = hh.nil? ? today+(curr_hour/24.0) : today+(hh.to_i/24.0)
 

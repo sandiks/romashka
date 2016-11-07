@@ -3,7 +3,7 @@ FbotWeb::Sqlru.controllers :forum do
 
   get :index do
     #LogHelper.log_req(request)
-    @title = "Gamed.ru::forums"
+    @title = "sql.ru::forums"
     @forums = Forums.filter(siteid:6,check:1).all
 
     render 'list'

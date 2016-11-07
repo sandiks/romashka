@@ -1,0 +1,12 @@
+
+
+<br />
+<%= partial('shared/page_nav', :object => {:count=>@responses, :url=>@url, :page => @page}) if @url  %>
+
+<br />
+
+<% @posts.each_with_index do |item,ind| %>
+	<%= ind %>
+	<%= partial 'shared/post', :object => item %>
+<% end %>
+<%= partial('shared/page_nav', :object => {:count=>@responses, :url=>@url, :page => @page}) if @url  %>

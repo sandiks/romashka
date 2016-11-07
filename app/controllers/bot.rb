@@ -8,7 +8,6 @@ FbotWeb::App.controllers :bot do
   get "/site/:id" do
     sid = params[:id].to_i
     bot_script_name = ForumHelper.get_bot_script_name(sid)
-    
 
     #Process.detach( fork{ exec "cd /home/fbot; ruby #{sites[sid]}.rb all"} )
     system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby #{bot_script_name}.rb all"

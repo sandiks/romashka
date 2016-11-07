@@ -12,7 +12,7 @@ module ForumHelper
     return  tpages[page]!=page_size
 
   end
-  
+
   def self.get_site_name(sid)
     sites = ['','','rsdn','lor','gamedev', 'onln', 'sqlru']
     sites[sid]
@@ -20,25 +20,33 @@ module ForumHelper
   end
 
   def self.get_real_thread_url(sid, fid, tid, page=1)
-    site_names = ['','','rsn','lor','gamedev', 'onln', 'sqlru','7','8','bitcointalk']
-  
+    site_names = ['','','rsn','lor','gamedev', 'onln', 'sqlru','7','8','bitcointalk','4pda']
+
     fname = get_forum_name_for_url(fid,sid)
     fname = fid if fname.nil?
 
     case sid
     when 2
       "http://rsdn.org/forum/#{fname}/#{tid}.flat.#{page}"
-    when 3 
-      pp = page>1 ? "/page#{page-1}" : "" 
+    when 3
+      pp = page>1 ? "/page#{page-1}" : ""
       "http://www.linux.org.ru/forum/#{fname}/#{tid}#{pp}"
     when 4
-      pp = page>1 ? "&page=#{page}" : "" 
-     "http://www.gamedev.ru/#{fname}/forum/?id=#{tid}#{pp}"
+      pp = page>1 ? "&page=#{page}" : ""
+      "http://www.gamedev.ru/#{fname}/forum/?id=#{tid}#{pp}"
     when 6
-      pp = page>1 ? "-#{page}" : "" 
+      pp = page>1 ? "-#{page}" : ""
       title=""
       "http://www.sql.ru/forum/#{tid}#{pp}#{title}"
+    when 10
 
+      if page>1
+        pp = "st=#{(page-1)*30}"
+        # "http://4pda.ru/forum/index.php?showforum=#{fid}&sort_key=last_post&sort_by=Z-A&prune_day=100&topicfilter=all&#{pp}"
+        "http://4pda.ru/forum/index.php?showtopic=#{tid}&#{pp}"
+      else
+        "http://4pda.ru/forum/index.php?showtopic=#{tid}"
+      end
     end
 
   end
