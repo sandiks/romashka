@@ -11,25 +11,31 @@ end
 
 <b><%= @title %></b>
 <br/>
-<table class="forumTable" style="width:70%">
+<table class="forumTable" style="width:75%">
 	<tbody>
 		<tr>
 			<th style="width:2%"></th>
 			<th style="width:5%">Ответов</th>
+			<th style="width:5%">pages</th>
 			<th style="width:15%">Дата</th>
+			<th>check</th>
 			<th>Тема</th>
-			<th>dwnl</th>
+			<th>track</th>
 		</tr>
 		<% @topics.each_with_index do |item,ind| %>
 		<tr>
 			<td style="text-align:center"><%= ind %></td>
-			<td style="text-align:center"><%= item.responses %></td>
+			<td style="text-align:right"><%= item.responses %></td>
+			<td style="text-align:right"><%= item.responses/20+1 %></td>
 			<td style="text-align:left" class="altCol"><%= item.updated.strftime("%F %k:%M ") %></td>
+			<td style="text-align:center">
+				<a href='<%= "/fpda/bot/check_thread/#{item.tid}" %>'>check</a>
+			</td>			
 			<td class="postslisttopic">
 				<a href='<%= "/fpda/thread/#{item.tid}/p/1" %>'><%= item.title.strip %></a>
 				...
 				<a href='<%= ForumHelper.get_real_thread_url(10,item.fid,item.tid,item.responses/20+1) %>'>[orig]</a>
-				<%= item.responses/20+1 %>|| <%= item.descr %>
+				|| <%= item.descr %>
 			</td>
 			<td style="text-align:center">
 				<a href='<%= (item.bot_tracked==1 ? "/fpda/thread/untrack/#{item.tid}" : "/fpda/thread/track/#{item.tid}") %>'>

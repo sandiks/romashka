@@ -22,13 +22,7 @@ FbotWeb::Fpda.controllers :forum do
     end
     render 'manage'
   end
-  
-  get '/check/:fid' do 
-    #LogHelper.log_req(request)
-    fid = params[:fid]
-    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby 4pda.rb df #{fid}"
-  end
-  
+    
   get :show, :with => :id do
     #LogHelper.log_req(request)
     @fid = params[:id]
@@ -42,6 +36,7 @@ FbotWeb::Fpda.controllers :forum do
 
     render 'show'
   end
+
   get :tracking_threads do
     #LogHelper.log_req(request)
 
@@ -49,16 +44,7 @@ FbotWeb::Fpda.controllers :forum do
     @topics = Threads.filter(siteid:SID,bot_tracked: 1).order(:title).all
     render 'show'
   end
-  
-  get '/check_forums' do 
-    #LogHelper.log_req(request)
-    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby 4pda.rb check_forums"
-  end
 
-  get '/check_tracking_threads' do 
-    #LogHelper.log_req(request)
-    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby 4pda.rb all"
-  end
   get '/track_f/:id' do
     #LogHelper.log_req(request)
     Forums.where(siteid:SID, fid: params[:id]).update(check: 1)

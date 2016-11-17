@@ -20,7 +20,7 @@
 				...
 			</td>
 			<td style="text-align:center">
-				<a href='<%= "/fpda/forum/check/#{item.fid}" %>'>check</a>
+				<a href='<%= "/fpda/bot/check_forum/#{item.fid}" %>'>check</a>
 				<a href='<%= (item.check==1 ? "/fpda/forum/untrack_f/#{item.fid}" : "/fpda/forum/track_f/#{item.fid}") %>'>
 				<%=(item.check==1 ? "untrack" : "track") %></a>
 				</td>
