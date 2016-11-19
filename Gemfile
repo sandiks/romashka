@@ -22,6 +22,7 @@ gem 'parallel'
 gem 'socksify'
 gem 'mechanize'
 gem 'redis'
+gem 'mysql2'
 # Test requirements
 
 # Padrino Stable Gem

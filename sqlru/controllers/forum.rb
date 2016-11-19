@@ -16,9 +16,8 @@ FbotWeb::Sqlru.controllers :forum do
     forum = Forums.first(siteid:6, fid: @fid)
     @title = forum.name
     @updated = forum.bot_updated
-    from = DateTime.now.new_offset(3/24.0)-1
 
-    @topics = Threads.filter(fid:@fid, siteid:6).filter('updated > ?',from).reverse_order(:updated).all
+    @topics = Threads.filter(fid:@fid, siteid:6).reverse_order(:updated).extension(:pagination).paginate(1, 30).all
 
     render 'index'
   end

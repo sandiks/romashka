@@ -31,7 +31,7 @@ end
 				...<%= calc_page(item.responses)%>
 				<a href='<%= ForumHelper.get_real_thread_url(6,item.fid,item.tid) %>'>[orig]</a>
 			</td>
-			<td style="text-align:center"><a href='<%= "/sqlru/thread/dwnl/#{item.tid}" %>'>dw 10 p</a></td>
+			<td style="text-align:center"><a href='<%= "/sqlru/thread/check_thread/#{item.tid}" %>'>check</a></td>
 		</tr>
 		<% end %>
 	</tbody>

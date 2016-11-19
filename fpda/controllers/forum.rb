@@ -28,8 +28,8 @@ FbotWeb::Fpda.controllers :forum do
     @fid = params[:id]
     forum = Forums.first(siteid:SID, fid: @fid)
     @title = forum.title
-    from = DateTime.now.new_offset(3/24.0)-1
-    @topics = Threads.filter(fid:@fid, siteid:SID).filter('updated > ?',from).reverse_order(:updated).all
+    from = DateTime.now.new_offset(3/24.0)-13
+    @topics = Threads.filter(fid:@fid, siteid:SID).reverse_order(:updated).extension(:pagination).paginate(1, 30).all
 
     render 'show'
   end

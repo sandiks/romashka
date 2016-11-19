@@ -3,7 +3,7 @@ FbotWeb::Sqlru.controllers :thread do
   
   get :index, :map => "/thread/:id/p/:page" do
     #LogHelper.log_req(request)
-    @tid=tid = params[:id]
+    @tid= tid = params[:id]
     @page = params[:page].to_i
 
     tp = Threads.first(siteid:SID, tid: tid)
@@ -89,4 +89,12 @@ FbotWeb::Sqlru.controllers :thread do
     render 'index'
 
   end
+
+  get '/check_thread/:id' do
+    #LogHelper.log_req(request)
+    tid=params[:id]
+    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby sqlr.rb dt #{tid} 3" #tid, pages_back
+    redirect "/sqlru/thread/#{tid}/p/1"
+  end
+
 end
