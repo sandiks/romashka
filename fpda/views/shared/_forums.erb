@@ -1,10 +1,16 @@
-<a href="/bot/site/10">all</a>
 
+<%
+ forums = FbotWeb::Fpda.cache['s10_checked_forums']
+ #pfids = forums.map(&:parent_fid)
+ parents = FbotWeb::Fpda.cache['s10_parents_forchecked']
+%>
 <table style="width:90%;">
 	<tr>
 	<td valign="top">
-		<% Forums.filter(siteid:10, check:1).each do |f| %>
-			||<a href="/fpda/forum/show/<%= f.fid %>"><%= f.title %> </a>
+		<% forums.each do |f| %>
+    <% pforum = parents.find{|pf| pf.fid == f.parent_fid}%>
+			<br/>
+      <a href="/fpda/forum/show/<%= f.fid %>"><%= f.title %></a> << <%= pforum.title if pforum %> 
 		<% end %>
 	</td>
 	</tr>

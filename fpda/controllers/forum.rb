@@ -16,9 +16,9 @@ FbotWeb::Fpda.controllers :forum do
     fid = params[:fid]
 
     if fid
-      @forums = Forums.filter(siteid:SID,parent_fid:fid).all
+      @forums = Forums.filter(siteid:SID,parent_fid:fid).order(:fid).all
     else
-      @forums = Forums.filter(siteid:SID,level:0).all
+      @forums = Forums.filter(siteid:SID,level:0).order(:fid).all
     end
     render 'manage'
   end
@@ -26,12 +26,9 @@ FbotWeb::Fpda.controllers :forum do
   get :show, :with => :id do
     #LogHelper.log_req(request)
     @fid = params[:id]
-    @forums = Forums.filter(siteid:SID).all
     forum = Forums.first(siteid:SID, fid: @fid)
     @title = forum.title
-    @updated = forum.bot_updated
-    from = DateTime.now.new_offset(3/24.0)-4
-
+    from = DateTime.now.new_offset(3/24.0)-1
     @topics = Threads.filter(fid:@fid, siteid:SID).filter('updated > ?',from).reverse_order(:updated).all
 
     render 'show'
