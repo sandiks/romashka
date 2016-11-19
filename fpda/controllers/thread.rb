@@ -28,7 +28,7 @@ FbotWeb::Fpda.controllers :thread do
 
     @posts = Posts.where(siteid:sid, :tid => tid).reverse_order(:addeddate).extension(:pagination).paginate(@page, 20).all
 
-    @thread_users = Posts.where(siteid:sid, :tid => tid).select(:addeduid, :addedby).all
+    @thread_users = @posts.map{ |pp| {addeduid: pp.addeduid, addedby: pp.addedby}}
     .group_by{ |p| p[:addeduid] }.sort_by{|k,v| -v.size}.map { |k,v| [k,v.first[:addedby],v.size]  }
 
     @responses = tp.responses.to_i

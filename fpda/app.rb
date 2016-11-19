@@ -4,15 +4,16 @@ module FbotWeb
     register Padrino::Helpers
     enable :sessions
 
+
     ##
     # Caching support.
     #
-    # register Padrino::Cache
-    # enable :caching
+     register Padrino::Cache
+     enable :caching
     #
     # You can customize caching store engines:
     #
-    # set :cache, Padrino::Cache.new(:LRUHash) # Keeps cached values in memory
+     set :cache, Padrino::Cache.new(:LRUHash) # Keeps cached values in memory
     # set :cache, Padrino::Cache.new(:Memcached) # Uses default server at localhost
     # set :cache, Padrino::Cache.new(:Memcached, :server => '127.0.0.1:11211', :exception_retry_limit => 1)
     # set :cache, Padrino::Cache.new(:Memcached, :backend => memcached_or_dalli_instance)
@@ -23,6 +24,9 @@ module FbotWeb
     # set :cache, Padrino::Cache.new(:Mongo, :backend => mongo_client_instance)
     # set :cache, Padrino::Cache.new(:File, :dir => Padrino.root('tmp', app_name.to_s, 'cache')) # default choice
     #
+    FbotWeb::Fpda.cache['s10_checked_forums'] = forums = Forums.filter(siteid:10,check:1).all
+    pfids = forums.map(&:parent_fid)
+    FbotWeb::Fpda.cache['s10_parents_forchecked'] = Forums.filter(siteid:10, fid: pfids).all
 
     ##
     # Application configuration options.
