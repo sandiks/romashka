@@ -1,7 +1,7 @@
 FbotWeb::Rsn.controllers :thread do
 
   get :index, :with => [:id, :page] do
-    LogHelper.log_req(request)
+    #LogHelper.log_req(request)
 
     tid = params[:id]
     @page = params[:page].to_i
@@ -11,8 +11,8 @@ FbotWeb::Rsn.controllers :thread do
     @title = tp.title
 
     #binding.pry
-    @posts = Posts.where(siteid:2, :tid => tid).order(:addeddate).extension(:pagination).paginate(@page, 20).all
-    @thread_users = Posts.where(siteid:2, :tid => tid).select(:addeduid, :addedby).all
+    @posts = Posts.where(siteid:2, tid: tid).order(:addeddate).extension(:pagination).paginate(@page, 20).all
+    @thread_users = Posts.where(siteid:2, tid: tid).select(:addeduid, :addedby).all
     .group_by{ |p| p[:addeduid] }.sort_by{|k,v| -v.size}.map { |k,v| [k,v.first[:addedby],v.size]  }
 
     @responses = tp.responses.to_i
@@ -29,8 +29,8 @@ FbotWeb::Rsn.controllers :thread do
     tp = Threads.first(siteid:2, tid: params[:id])
     @title = tp.title
 
-    @posts = Posts.where(siteid:2,:tid => params[:id], :addeduid => params[:uid]).order(:addeddate).all #extension(:pagination).paginate(@page, 20).all
-    @thread_users = Posts.where(siteid:2,:tid => params[:id]).select(:addeduid, :addedby).all
+    @posts = Posts.where(siteid:2, tid: params[:id], :addeduid => params[:uid]).order(:addeddate).all #extension(:pagination).paginate(@page, 20).all
+    @thread_users = Posts.where(siteid:2, tid: params[:id]).select(:addeduid, :addedby).all
     .group_by{ |p| p[:addeduid] }.sort_by{|k,v| -v.size}.map { |k,v| [k,v.first[:addedby],v.size]  }
 
     @responses = tp.responses.to_i

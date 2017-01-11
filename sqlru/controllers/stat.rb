@@ -5,8 +5,7 @@ FbotWeb::Sqlru.controllers :stat do
 
     from = DateTime.now.new_offset(3/24.0).beginning_of_day
     today_posts = Posts.filter('siteid=? and addeddate > ?',6,from)
-    .order(:addeddate)
-    .select(:addeduid, :addedby, :addeddate, :body, :tid).all
+    .order(:addeddate).all
 
     @threads = Threads.filter('siteid=? and updated > ?',6,from).to_hash(:tid, :title)
 

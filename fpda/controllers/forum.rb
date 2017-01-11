@@ -29,16 +29,23 @@ FbotWeb::Fpda.controllers :forum do
     forum = Forums.first(siteid:@@sid, fid: @fid)
     @title = forum.title
     from = DateTime.now.new_offset(3/24.0)-13
-    @topics = Threads.filter(fid:@fid, siteid:@@sid).reverse_order(:updated).extension(:pagination).paginate(1, 30).all
+    @topics = Threads.filter(fid:@fid, siteid:@@sid).reverse_order(:updated).extension(:pagination).paginate(1, 50).all
 
     render 'show'
   end
 
-  get :tracking_threads do
+  get '/tracking_threads' do
     #LogHelper.log_req(request)
 
     @title = "4PDA.ru::tracking"
-    @topics = Threads.filter(siteid:@@sid,bot_tracked: 1).order(:title).all
+    @topics = Threads.filter(siteid:@@sid,bot_tracked: 1).exclude(fid:287).order(:title).all
+    render 'show'
+  end
+
+  get '/tracking_threads/buy' do
+    #LogHelper.log_req(request)
+    @title = "4PDA.ru::tracking"
+    @topics = Threads.filter(siteid:@@sid,bot_tracked: 1, fid:287).order(:title).all
     render 'show'
   end
 

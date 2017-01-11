@@ -17,7 +17,7 @@ FbotWeb::Fpda.controllers :bot do
   get '/check_thread/:id' do
     #LogHelper.log_req(request)
     tid=params[:id]
-    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby 4pda.rb dt #{tid} 2" #4pda.rb tid, pages_back
+    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby 4pda.rb dt #{tid} 5" #4pda.rb tid, pages_back
     redirect "fpda/thread/#{tid}/p/1"
   end
 

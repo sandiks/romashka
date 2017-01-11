@@ -2,7 +2,7 @@ FbotWeb::Rsn.controllers :forum do
 
 
   get :index do
-    LogHelper.log_req(request)
+    #LogHelper.log_req(request)
     @title = "rsn::forums:list"
     @forums = Forums.filter(siteid:2, level: 1).order(:bot_updated).all
     render 'list'
@@ -22,7 +22,7 @@ FbotWeb::Rsn.controllers :forum do
   end
 
   get :index, :with => :id do
-    LogHelper.log_req(request)
+    #LogHelper.log_req(request)
     forum = Forums.first(siteid:2, fid: params[:id])
     @title = forum.name
     @topics = Threads.filter(siteid:2, fid: params[:id]).reverse_order(:updated).extension(:pagination).paginate(1, 30).all

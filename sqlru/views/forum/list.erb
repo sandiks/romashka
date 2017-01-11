@@ -16,8 +16,8 @@
 				
 				<th style="width:25%">Дата</th>
 			</tr>
-			<% topics = Threads.filter(siteid:6, fid: forum.fid).reverse_order(:updated).all%>
-			<% for item in topics.take(5) %>
+			<% topics = Threads.filter(siteid:6, fid: forum.fid).reverse_order(:updated)%>
+			<% for item in topics.limit(5) %>
 			<tr>
 				<td class="postslisttopic">
 					<a href="<%= ForumHelper.get_real_thread_url(6,item.fid,item.tid) %>"><%= item.title %></a>
