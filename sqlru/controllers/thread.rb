@@ -1,19 +1,4 @@
 FbotWeb::Sqlru.controllers :thread do
-<<<<<<< HEAD
-  
-  get :index, :map => "/thread/:id/p/:page" do
-    #LogHelper.log_req(request)
-    @tid= tid = params[:id]
-    @page = params[:page].to_i
-
-    tp = Threads.first(siteid:6, tid: tid)
-    @title = tp.title
-    #binding.pry
-
-    @pages_count =Tpages.filter(siteid:6, tid:tid).map([:page,:postcount])
-
-    @posts = Posts.where(siteid:6, :tid => tid).reverse_order(:addeddate).extension(:pagination).paginate(@page, 25).all
-=======
   SID = 6
   
   get :index, :map => "/thread/:id/p/:page" do
@@ -28,7 +13,6 @@ FbotWeb::Sqlru.controllers :thread do
     @pages_count =Tpages.filter(siteid:SID, tid:tid).map([:page,:postcount])
 
     @posts = Posts.where(siteid:SID, :tid => tid).reverse_order(:addeddate).extension(:pagination).paginate(@page, 25).all
->>>>>>> 850295f4f56b0e85b0c26477adf200167fd2286f
 
     @thread_users = @posts.map{ |pp| {addeduid: pp.addeduid, addedby: pp.addedby}}
     .group_by{ |p| p[:addeduid] }.sort_by{|k,v| -v.size}.map { |k,v| [k,v.first[:addedby],v.size]  }
@@ -43,20 +27,12 @@ FbotWeb::Sqlru.controllers :thread do
     @tid = tid = params[:id]
     @page = params[:page].to_i
 
-<<<<<<< HEAD
     tp = Threads.first(siteid:6, tid: tid)
     @title = tp.title
     @pages_count =Tpages.filter(siteid:6, tid:tid).map([:page,:postcount])
 
     @posts = Posts.where(siteid:6, :tid => tid).order(:addeddate).extension(:pagination).paginate(@page, 25).all
-=======
-    tp = Threads.first(siteid:SID, tid: tid)
-    @title = tp.title
-    @pages_count =Tpages.filter(siteid:SID, tid:tid).map([:page,:postcount])
 
-    @posts = Posts.where(siteid:SID, :tid => tid).order(:addeddate).extension(:pagination).paginate(@page, 25).all
->>>>>>> 850295f4f56b0e85b0c26477adf200167fd2286f
-    
     @thread_users = @posts.map{ |pp| {addeduid: pp.addeduid, addedby: pp.addedby}}
     .group_by{ |p| p[:addeduid] }.sort_by{|k,v| -v.size}.map { |k,v| [k,v.first[:addedby],v.size]  }
 
