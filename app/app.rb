@@ -66,7 +66,7 @@ module FbotWeb
       redirect 'forum'
     end
 
-    FbotWeb::App.cache['fbot_forums'] = Forums.all
+    #FbotWeb::App.cache['fbot_forums'] = Forums.all
     FbotWeb::App.cache['fbot_sites'] = Sites.all
   end
 end

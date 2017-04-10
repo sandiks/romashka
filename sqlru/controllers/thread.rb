@@ -1,4 +1,5 @@
 FbotWeb::Sqlru.controllers :thread do
+<<<<<<< HEAD
   
   get :index, :map => "/thread/:id/p/:page" do
     #LogHelper.log_req(request)
@@ -12,6 +13,22 @@ FbotWeb::Sqlru.controllers :thread do
     @pages_count =Tpages.filter(siteid:6, tid:tid).map([:page,:postcount])
 
     @posts = Posts.where(siteid:6, :tid => tid).reverse_order(:addeddate).extension(:pagination).paginate(@page, 25).all
+=======
+  SID = 6
+  
+  get :index, :map => "/thread/:id/p/:page" do
+    #LogHelper.log_req(request)
+    @tid=tid = params[:id]
+    @page = params[:page].to_i
+
+    tp = Threads.first(siteid:SID, tid: tid)
+    @title = tp.title
+    #binding.pry
+
+    @pages_count =Tpages.filter(siteid:SID, tid:tid).map([:page,:postcount])
+
+    @posts = Posts.where(siteid:SID, :tid => tid).reverse_order(:addeddate).extension(:pagination).paginate(@page, 25).all
+>>>>>>> 850295f4f56b0e85b0c26477adf200167fd2286f
 
     @thread_users = @posts.map{ |pp| {addeduid: pp.addeduid, addedby: pp.addedby}}
     .group_by{ |p| p[:addeduid] }.sort_by{|k,v| -v.size}.map { |k,v| [k,v.first[:addedby],v.size]  }
@@ -26,11 +43,19 @@ FbotWeb::Sqlru.controllers :thread do
     @tid = tid = params[:id]
     @page = params[:page].to_i
 
+<<<<<<< HEAD
     tp = Threads.first(siteid:6, tid: tid)
     @title = tp.title
     @pages_count =Tpages.filter(siteid:6, tid:tid).map([:page,:postcount])
 
     @posts = Posts.where(siteid:6, :tid => tid).order(:addeddate).extension(:pagination).paginate(@page, 25).all
+=======
+    tp = Threads.first(siteid:SID, tid: tid)
+    @title = tp.title
+    @pages_count =Tpages.filter(siteid:SID, tid:tid).map([:page,:postcount])
+
+    @posts = Posts.where(siteid:SID, :tid => tid).order(:addeddate).extension(:pagination).paginate(@page, 25).all
+>>>>>>> 850295f4f56b0e85b0c26477adf200167fd2286f
     
     @thread_users = @posts.map{ |pp| {addeduid: pp.addeduid, addedby: pp.addedby}}
     .group_by{ |p| p[:addeduid] }.sort_by{|k,v| -v.size}.map { |k,v| [k,v.first[:addedby],v.size]  }
@@ -45,11 +70,11 @@ FbotWeb::Sqlru.controllers :thread do
 
     LogHelper.log_req(request)
 
-    tp = Threads.first(siteid:6, tid: params[:id])
+    tp = Threads.first(siteid:SID, tid: params[:id])
     @title = tp.title
 
-    @posts = Posts.where(siteid:6,:tid => params[:id], :addeduid => params[:uid]).order(:addeddate).all #extension(:pagination).paginate(@page, 20).all
-    @thread_users = Posts.where(siteid:6,:tid => params[:id]).select(:addeduid, :addedby).all
+    @posts = Posts.where(siteid:SID,:tid => params[:id], :addeduid => params[:uid]).order(:addeddate).all #extension(:pagination).paginate(@page, 20).all
+    @thread_users = Posts.where(siteid:SID,:tid => params[:id]).select(:addeduid, :addedby).all
     .group_by{ |p| p[:addeduid] }.sort_by{|k,v| -v.size}.map { |k,v| [k,v.first[:addedby],v.size]  }
 
     @responses = tp.responses.to_i
@@ -60,10 +85,10 @@ FbotWeb::Sqlru.controllers :thread do
   end
   get :users_time, :map => "/thread/:tid/users_time/:uid" do
 
-    tp = Threads.first(siteid:6, tid: params[:tid])
+    tp = Threads.first(siteid:SID, tid: params[:tid])
     @title = tp.title
 
-    @posts_time = Posts.where(siteid:6,:tid => params[:tid], :addeduid => params[:uid]).order(:addeddate).map(:addeddate)
+    @posts_time = Posts.where(siteid:SID,:tid => params[:tid], :addeduid => params[:uid]).order(:addeddate).map(:addeddate)
 
     render 'thread_time_table'
 
@@ -73,13 +98,13 @@ FbotWeb::Sqlru.controllers :thread do
 
     #LogHelper.log_req(request)
 
-    tp = Threads.first(siteid:6, tid: params[:id])
+    tp = Threads.first(siteid:SID, tid: params[:id])
     @title = tp.title
 
-    @posts = Posts.where(siteid:6, tid: params[:id]).where(Sequel.like(:body, '%actualfile.aspx?%')).reverse_order(:addeddate).all #extension(:pagination).paginate(@page, 20).all
+    @posts = Posts.where(siteid:SID, tid: params[:id]).where(Sequel.like(:body, '%actualfile.aspx?%')).reverse_order(:addeddate).all #extension(:pagination).paginate(@page, 20).all
     @posts = @posts.select { |pp| SqlRuForumHelper.remove_quoted_from_post(pp[:body]).include? "actualfile.aspx?"  }
 
-    @thread_users = Posts.where(siteid:6,:tid => params[:id]).select(:addeduid, :addedby).all
+    @thread_users = Posts.where(siteid:SID,:tid => params[:id]).select(:addeduid, :addedby).all
     .group_by{ |p| p[:addeduid] }.sort_by{|k,v| -v.size}.map { |k,v| [k,v.first[:addedby],v.size]  }
 
     @responses = tp.responses.to_i
