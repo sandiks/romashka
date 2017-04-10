@@ -3,21 +3,21 @@ FbotWeb::Fpda.controllers :bot do
   get '/check_forum/:id' do
     #LogHelper.log_req(request)
     fid = params[:id]
-    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby 4pda.rb df #{fid}"
+    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby 4pda.rb df #{fid} 2"
     redirect "/fpda/forum/show/#{fid}"
 
   end
 
   get '/check_forums' do
     #LogHelper.log_req(request)
-    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby 4pda.rb check_forums"
+    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby 4pda.rb check_forums 2"
     redirect "#{request.referrer}"
   end
   
   get '/check_thread/:id' do
     #LogHelper.log_req(request)
     tid=params[:id]
-    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby 4pda.rb dt #{tid} 5" #4pda.rb tid, pages_back
+    system "cd '#{ForumHelper::CRAWLER_DIR}'; ruby 4pda.rb dt #{tid} 4" #4pda.rb tid, pages_back
     redirect "fpda/thread/#{tid}/p/1"
   end
 

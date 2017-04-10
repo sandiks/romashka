@@ -13,11 +13,11 @@ module FbotWeb
     #
     # You can customize caching store engines:
     #
-    # set :cache, Padrino::Cache.new(:LRUHash) # Keeps cached values in memory
+     set :cache, Padrino::Cache.new(:LRUHash) # Keeps cached values in memory
     # set :cache, Padrino::Cache.new(:Memcached) # Uses default server at localhost
     # set :cache, Padrino::Cache.new(:Memcached, '127.0.0.1:11211', :exception_retry_limit => 1)
     # set :cache, Padrino::Cache.new(:Memcached, :backend => memcached_or_dalli_instance)
-     set :cache, Padrino::Cache.new(:Redis) # Uses default server at localhost
+    # set :cache, Padrino::Cache.new(:Redis) # Uses default server at localhost
     # set :cache, Padrino::Cache.new(:Redis, :host => '127.0.0.1', :port => 6379, :db => 0)
     # set :cache, Padrino::Cache.new(:Redis, :backend => redis_instance)
     # set :cache, Padrino::Cache.new(:Mongo) # Uses default server at localhost
@@ -66,7 +66,7 @@ module FbotWeb
       redirect 'forum'
     end
 
-    #FbotWeb::App.cache['fbot_forums'] = Forums.all
+    FbotWeb::App.cache['fbot_forums'] = Forums.all
     FbotWeb::App.cache['fbot_sites'] = Sites.all
   end
 end

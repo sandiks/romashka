@@ -6,6 +6,8 @@
 <br />
 
 <% @posts.each_with_index do |item,ind| %>
+      <%= "VIEWED" if @last_viewed && item.addeddate < @last_viewed %>
+
 	<%= ind %>
 	<%= partial 'shared/post', :object => item %>
 <% end %>
